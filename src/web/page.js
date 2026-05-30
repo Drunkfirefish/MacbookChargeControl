@@ -92,6 +92,35 @@ export const pageHtml = `<!doctype html>
       line-height: 18px;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .language-picker {
+      display: flex;
+      padding: 3px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .language-option {
+      min-height: 28px;
+      border: 0;
+      border-radius: 5px;
+      padding: 4px 8px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 12px;
+    }
+
+    .language-option.active {
+      color: var(--primary-text);
+      background: var(--primary);
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -392,6 +421,11 @@ export const pageHtml = `<!doctype html>
         width: 100%;
       }
 
+      .header-actions {
+        display: grid;
+        grid-template-columns: auto 1fr;
+      }
+
       .gauge {
         margin: 0 auto;
       }
@@ -407,45 +441,51 @@ export const pageHtml = `<!doctype html>
     <header>
       <div>
         <h1>MacCharge</h1>
-        <p class="subtitle">MacBook 充电控制</p>
+        <p class="subtitle" data-i18n="subtitle">MacBook 充电控制</p>
       </div>
-      <div class="status-pill" id="connectionState">未连接</div>
+      <div class="header-actions">
+        <div class="language-picker" aria-label="Language">
+          <button id="languageZhButton" class="language-option" type="button">中</button>
+          <button id="languageEnButton" class="language-option" type="button">EN</button>
+        </div>
+        <div class="status-pill" id="connectionState">未连接</div>
+      </div>
     </header>
 
     <div class="grid">
       <section>
-        <h2 class="section-title">电池状态</h2>
+        <h2 class="section-title" data-i18n="batteryStatus">电池状态</h2>
         <div class="panel battery">
           <div class="gauge" id="batteryGauge" style="--gauge-angle: 0deg">
             <strong id="batteryPercent">--%</strong>
           </div>
           <div class="facts">
-            <div class="fact"><span>电源</span><strong id="powerSource">--</strong></div>
-            <div class="fact"><span>接入电源</span><strong id="acAttached">--</strong></div>
-            <div class="fact"><span>充电中</span><strong id="charging">--</strong></div>
-            <div class="fact"><span>当前状态</span><strong id="powerFlow">--</strong></div>
-            <div class="fact"><span>电池功率</span><strong id="powerWatts">--</strong></div>
-            <div class="fact"><span>电池电流</span><strong id="currentAmps">--</strong></div>
-            <div class="fact"><span>电池电压</span><strong id="voltageVolts">--</strong></div>
-            <div class="fact"><span>上限</span><strong id="currentLimit">--</strong></div>
+            <div class="fact"><span data-i18n="powerSource">电源</span><strong id="powerSource">--</strong></div>
+            <div class="fact"><span data-i18n="acAttached">接入电源</span><strong id="acAttached">--</strong></div>
+            <div class="fact"><span data-i18n="charging">充电中</span><strong id="charging">--</strong></div>
+            <div class="fact"><span data-i18n="currentState">当前状态</span><strong id="powerFlow">--</strong></div>
+            <div class="fact"><span data-i18n="batteryPower">电池功率</span><strong id="powerWatts">--</strong></div>
+            <div class="fact"><span data-i18n="batteryCurrent">电池电流</span><strong id="currentAmps">--</strong></div>
+            <div class="fact"><span data-i18n="batteryVoltage">电池电压</span><strong id="voltageVolts">--</strong></div>
+            <div class="fact"><span data-i18n="limit">上限</span><strong id="currentLimit">--</strong></div>
           </div>
         </div>
       </section>
 
       <section>
-        <h2 class="section-title">控制</h2>
+        <h2 class="section-title" data-i18n="controls">控制</h2>
         <div class="panel">
           <div class="form-row">
             <label>
-              Token
+              <span data-i18n="token">Token</span>
               <input id="tokenInput" type="password" autocomplete="current-password">
             </label>
-            <button id="saveTokenButton" class="primary" type="button">保存</button>
+            <button id="saveTokenButton" class="primary" type="button" data-i18n="save">保存</button>
           </div>
 
           <div class="buttons">
-            <button id="refreshButton" type="button">刷新</button>
-            <button id="clearTokenButton" type="button">清除 Token</button>
+            <button id="refreshButton" type="button" data-i18n="refresh">刷新</button>
+            <button id="clearTokenButton" type="button" data-i18n="clearToken">清除 Token</button>
           </div>
 
           <button id="chargePauseButton" class="danger top-action" type="button">暂停充电</button>
@@ -455,30 +495,30 @@ export const pageHtml = `<!doctype html>
       </section>
 
       <section class="switcher-section">
-        <h2 class="section-title">充电策略</h2>
+        <h2 class="section-title" data-i18n="chargingPolicy">充电策略</h2>
         <div class="panel switcher-panel">
           <div class="facts">
-            <div class="fact"><span>模式</span><strong id="switcherMode">--</strong></div>
-            <div class="fact"><span>浮动范围</span><strong id="switcherRange">--</strong></div>
-            <div class="fact"><span>适配器请求</span><strong id="switcherAdapterRequest">--</strong></div>
-            <div class="fact"><span>后台控制器</span><strong id="switcherController">--</strong></div>
+            <div class="fact"><span data-i18n="mode">模式</span><strong id="switcherMode">--</strong></div>
+            <div class="fact"><span data-i18n="floatingRange">浮动范围</span><strong id="switcherRange">--</strong></div>
+            <div class="fact"><span data-i18n="adapterRequest">适配器请求</span><strong id="switcherAdapterRequest">--</strong></div>
+            <div class="fact"><span data-i18n="controller">后台控制器</span><strong id="switcherController">--</strong></div>
           </div>
           <div class="policy-controls">
             <label class="switch-row">
               <span class="switch-copy">
-                <strong>充电限制</strong>
-                <small>关闭后恢复 macOS 默认充电行为</small>
+                <strong data-i18n="chargeLimit">充电限制</strong>
+                <small data-i18n="limitDescription">关闭后恢复 macOS 默认充电行为</small>
               </span>
               <input id="limitEnabledInput" class="switch" type="checkbox">
             </label>
             <label>
-              充电上限
+              <span data-i18n="upperLimit">充电上限</span>
               <input id="limitInput" type="number" min="20" max="100" step="1" value="85">
             </label>
             <label class="switch-row">
               <span class="switch-copy">
-                <strong>浮动充电</strong>
-                <small>在上限与上限减 5% 之间循环</small>
+                <strong data-i18n="floatingCharging">浮动充电</strong>
+                <small data-i18n="floatingDescription">在上限与上限减 5% 之间循环</small>
               </span>
               <input id="switcherEnabledInput" class="switch" type="checkbox">
             </label>
@@ -491,7 +531,130 @@ export const pageHtml = `<!doctype html>
 
   <script>
     const tokenKey = 'maccharge.token';
+    const languageKey = 'maccharge.language';
+    const translations = {
+      zh: {
+        subtitle: 'MacBook 充电控制',
+        disconnected: '未连接',
+        connected: '已连接',
+        batteryStatus: '电池状态',
+        powerSource: '电源',
+        acAttached: '接入电源',
+        charging: '充电中',
+        currentState: '当前状态',
+        batteryPower: '电池功率',
+        batteryCurrent: '电池电流',
+        batteryVoltage: '电池电压',
+        limit: '上限',
+        controls: '控制',
+        token: 'Token',
+        save: '保存',
+        refresh: '刷新',
+        clearToken: '清除 Token',
+        pauseCharging: '暂停充电',
+        resumeCharging: '恢复充电',
+        waitingToken: '等待 token',
+        chargingPolicy: '充电策略',
+        mode: '模式',
+        floatingRange: '浮动范围',
+        adapterRequest: '适配器请求',
+        controller: '后台控制器',
+        chargeLimit: '充电限制',
+        limitDescription: '关闭后恢复 macOS 默认充电行为',
+        upperLimit: '充电上限',
+        floatingCharging: '浮动充电',
+        floatingDescription: '在上限与上限减 5% 之间循环',
+        yes: '是',
+        no: '否',
+        flowCharging: '充电',
+        flowDischarging: '放电',
+        flowIdle: '空闲',
+        modeManualPause: '手动暂停',
+        modeFloating: '浮动充电',
+        modeLimit: '上限限制',
+        modeDefault: '系统默认',
+        requestOff: '关闭',
+        requestOn: '开启',
+        controllerRunning: '运行中',
+        controllerStopped: '未运行',
+        tokenRequired: 'Token 未填写',
+        requestFailed: '请求失败',
+        statusUpdated: '状态已更新',
+        tokenSaved: 'Token 已保存',
+        tokenCleared: 'Token 已清除',
+        strategyResumed: '已恢复原有充电策略',
+        allChargingPaused: '已暂停全部充电行为',
+        limitEnabled: '充电限制已开启',
+        limitDisabled: '充电限制已关闭，已恢复系统默认充电',
+        upperLimitUpdated: '充电上限已更新',
+        floatingEnabled: '浮动充电已开启',
+        floatingDisabled: '浮动充电已关闭',
+      },
+      en: {
+        subtitle: 'MacBook charging control',
+        disconnected: 'Disconnected',
+        connected: 'Connected',
+        batteryStatus: 'Battery status',
+        powerSource: 'Power source',
+        acAttached: 'AC attached',
+        charging: 'Charging',
+        currentState: 'Current state',
+        batteryPower: 'Battery power',
+        batteryCurrent: 'Battery current',
+        batteryVoltage: 'Battery voltage',
+        limit: 'Limit',
+        controls: 'Controls',
+        token: 'Token',
+        save: 'Save',
+        refresh: 'Refresh',
+        clearToken: 'Clear token',
+        pauseCharging: 'Pause charging',
+        resumeCharging: 'Resume charging',
+        waitingToken: 'Waiting for token',
+        chargingPolicy: 'Charging policy',
+        mode: 'Mode',
+        floatingRange: 'Floating range',
+        adapterRequest: 'Adapter request',
+        controller: 'Background controller',
+        chargeLimit: 'Charge limit',
+        limitDescription: 'Turn off to restore default macOS charging',
+        upperLimit: 'Charge limit',
+        floatingCharging: 'Floating charge',
+        floatingDescription: 'Cycle between the limit and 5% below it',
+        yes: 'Yes',
+        no: 'No',
+        flowCharging: 'Charging',
+        flowDischarging: 'Discharging',
+        flowIdle: 'Idle',
+        modeManualPause: 'Manually paused',
+        modeFloating: 'Floating charge',
+        modeLimit: 'Charge limited',
+        modeDefault: 'System default',
+        requestOff: 'Off',
+        requestOn: 'On',
+        controllerRunning: 'Running',
+        controllerStopped: 'Stopped',
+        tokenRequired: 'Token is required',
+        requestFailed: 'Request failed',
+        statusUpdated: 'Status updated',
+        tokenSaved: 'Token saved',
+        tokenCleared: 'Token cleared',
+        strategyResumed: 'Previous charging policy restored',
+        allChargingPaused: 'All charging behavior paused',
+        limitEnabled: 'Charge limit enabled',
+        limitDisabled: 'Charge limit disabled; default charging restored',
+        upperLimitUpdated: 'Charge limit updated',
+        floatingEnabled: 'Floating charge enabled',
+        floatingDisabled: 'Floating charge disabled',
+      },
+    };
+    const savedLanguage = localStorage.getItem(languageKey);
+    let language = savedLanguage === 'zh' || savedLanguage === 'en'
+      ? savedLanguage
+      : (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en';
     const elements = {
+      languageZhButton: document.getElementById('languageZhButton'),
+      languageEnButton: document.getElementById('languageEnButton'),
       tokenInput: document.getElementById('tokenInput'),
       limitInput: document.getElementById('limitInput'),
       saveTokenButton: document.getElementById('saveTokenButton'),
@@ -518,9 +681,42 @@ export const pageHtml = `<!doctype html>
       switcherController: document.getElementById('switcherController'),
       switcherError: document.getElementById('switcherError'),
     };
+    let connected = false;
+    let currentBatteryStatus;
     let currentPolicy;
+    let currentMessage = { value: 'waitingToken', kind: '', raw: false };
 
     elements.tokenInput.value = localStorage.getItem(tokenKey) || '';
+
+    function t(key) {
+      return translations[language][key] || translations.en[key] || key;
+    }
+
+    function renderConnection() {
+      elements.connectionState.textContent = t(connected ? 'connected' : 'disconnected');
+    }
+
+    function renderMessage() {
+      elements.message.textContent = currentMessage.raw ? currentMessage.value : t(currentMessage.value);
+      elements.message.className = 'message' + (currentMessage.kind ? ' ' + currentMessage.kind : '');
+    }
+
+    function applyLanguage(nextLanguage, persist = false) {
+      language = nextLanguage === 'zh' ? 'zh' : 'en';
+      if (persist) localStorage.setItem(languageKey, language);
+      document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+      for (const element of document.querySelectorAll('[data-i18n]')) {
+        element.textContent = t(element.dataset.i18n);
+      }
+      elements.languageZhButton.classList.toggle('active', language === 'zh');
+      elements.languageEnButton.classList.toggle('active', language === 'en');
+      elements.languageZhButton.setAttribute('aria-pressed', String(language === 'zh'));
+      elements.languageEnButton.setAttribute('aria-pressed', String(language === 'en'));
+      renderConnection();
+      renderMessage();
+      if (currentBatteryStatus) renderStatus(currentBatteryStatus);
+      if (currentPolicy) renderPolicy(currentPolicy);
+    }
 
     function setBusy(isBusy) {
       for (const button of document.querySelectorAll('button')) {
@@ -528,9 +724,9 @@ export const pageHtml = `<!doctype html>
       }
     }
 
-    function setMessage(text, kind) {
-      elements.message.textContent = text;
-      elements.message.className = 'message' + (kind ? ' ' + kind : '');
+    function setMessage(value, kind, raw = false) {
+      currentMessage = { value, kind, raw };
+      renderMessage();
     }
 
     function currentToken() {
@@ -540,7 +736,7 @@ export const pageHtml = `<!doctype html>
     async function api(path, options = {}) {
       const token = currentToken();
       if (!token) {
-        throw new Error('Token 未填写');
+        throw new Error('TOKEN_REQUIRED');
       }
       const response = await fetch(path, {
         ...options,
@@ -552,30 +748,32 @@ export const pageHtml = `<!doctype html>
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || '请求失败');
+        throw new Error(data.error || 'REQUEST_FAILED');
       }
       return data;
     }
 
     function renderStatus(status) {
+      currentBatteryStatus = status;
       const percent = Number.isFinite(status.percent) ? status.percent : null;
       const angle = percent === null ? 0 : Math.max(0, Math.min(100, percent)) * 3.6;
 
       elements.batteryGauge.style.setProperty('--gauge-angle', angle + 'deg');
       elements.batteryPercent.textContent = percent === null ? '--%' : percent + '%';
       elements.powerSource.textContent = status.powerSource || '--';
-      elements.acAttached.textContent = status.acAttached ? '是' : '否';
-      elements.charging.textContent = status.charging ? '是' : '否';
+      elements.acAttached.textContent = status.acAttached ? t('yes') : t('no');
+      elements.charging.textContent = status.charging ? t('yes') : t('no');
       elements.powerFlow.textContent = {
-        charging: '充电',
-        discharging: '放电',
-        idle: '空闲',
+        charging: t('flowCharging'),
+        discharging: t('flowDischarging'),
+        idle: t('flowIdle'),
       }[status.powerFlow] || '--';
       elements.powerWatts.textContent = formatMetric(status.powerWatts, 1, ' W');
       elements.currentAmps.textContent = formatMetric(status.currentAmps, 3, ' A');
       elements.voltageVolts.textContent = formatMetric(status.voltageVolts, 3, ' V');
       elements.currentLimit.textContent = status.limit === null || status.limit === undefined ? '--' : status.limit + '%';
-      elements.connectionState.textContent = '已连接';
+      connected = true;
+      renderConnection();
 
     }
 
@@ -585,7 +783,7 @@ export const pageHtml = `<!doctype html>
 
     function renderPolicy(policy) {
       currentPolicy = policy;
-      elements.chargePauseButton.textContent = policy.manualPause ? '恢复充电' : '暂停充电';
+      elements.chargePauseButton.textContent = policy.manualPause ? t('resumeCharging') : t('pauseCharging');
       elements.chargePauseButton.className = (policy.manualPause ? 'success' : 'danger') + ' top-action';
       elements.limitEnabledInput.checked = policy.limitEnabled;
       elements.switcherEnabledInput.checked = policy.enabled;
@@ -593,10 +791,10 @@ export const pageHtml = `<!doctype html>
       elements.switcherEnabledInput.disabled = policy.manualPause || !policy.limitEnabled;
       elements.limitInput.disabled = policy.manualPause || !policy.limitEnabled;
       elements.limitInput.value = policy.upperLimit;
-      elements.switcherMode.textContent = policy.manualPause ? '手动暂停' : policy.enabled ? '浮动充电' : policy.limitEnabled ? '上限限制' : '系统默认';
+      elements.switcherMode.textContent = policy.manualPause ? t('modeManualPause') : policy.enabled ? t('modeFloating') : policy.limitEnabled ? t('modeLimit') : t('modeDefault');
       elements.switcherRange.textContent = policy.limitEnabled ? policy.lowerLimit + '% - ' + policy.upperLimit + '%' : '--';
-      elements.switcherAdapterRequest.textContent = policy.lastAdapterRequest === 'off' ? '关闭' : '开启';
-      elements.switcherController.textContent = policy.controllerLoaded ? '运行中' : '未运行';
+      elements.switcherAdapterRequest.textContent = policy.lastAdapterRequest === 'off' ? t('requestOff') : t('requestOn');
+      elements.switcherController.textContent = policy.controllerLoaded ? t('controllerRunning') : t('controllerStopped');
       elements.switcherError.hidden = !policy.lastError;
       elements.switcherError.textContent = policy.lastError || '';
     }
@@ -610,10 +808,11 @@ export const pageHtml = `<!doctype html>
         ]);
         renderStatus(batteryStatus);
         renderPolicy(policy);
-        setMessage('状态已更新', 'ok');
+        setMessage('statusUpdated', 'ok');
       } catch (error) {
-        elements.connectionState.textContent = '未连接';
-        setMessage(error.message, 'error');
+        connected = false;
+        renderConnection();
+        setErrorMessage(error);
       } finally {
         setBusy(false);
       }
@@ -628,49 +827,65 @@ export const pageHtml = `<!doctype html>
         }));
         setMessage(successText, 'ok');
       } catch (error) {
-        setMessage(error.message, 'error');
+        setErrorMessage(error);
       } finally {
         setBusy(false);
       }
     }
 
+    function setErrorMessage(error) {
+      if (error.message === 'TOKEN_REQUIRED') {
+        setMessage('tokenRequired', 'error');
+        return;
+      }
+      if (error.message === 'REQUEST_FAILED') {
+        setMessage('requestFailed', 'error');
+        return;
+      }
+      setMessage(error.message, 'error', true);
+    }
+
     elements.saveTokenButton.addEventListener('click', () => {
       localStorage.setItem(tokenKey, currentToken());
-      setMessage('Token 已保存', 'ok');
+      setMessage('tokenSaved', 'ok');
       refreshStatus();
     });
 
     elements.clearTokenButton.addEventListener('click', () => {
       localStorage.removeItem(tokenKey);
       elements.tokenInput.value = '';
-      elements.connectionState.textContent = '未连接';
-      setMessage('Token 已清除');
+      connected = false;
+      renderConnection();
+      setMessage('tokenCleared');
     });
 
+    elements.languageZhButton.addEventListener('click', () => applyLanguage('zh', true));
+    elements.languageEnButton.addEventListener('click', () => applyLanguage('en', true));
     elements.refreshButton.addEventListener('click', refreshStatus);
     elements.chargePauseButton.addEventListener('click', () => {
       const isPaused = currentPolicy && currentPolicy.manualPause;
-      postPolicyAction(isPaused ? '/api/policy/resume' : '/api/policy/pause', null, isPaused ? '已恢复原有充电策略' : '已暂停全部充电行为');
+      postPolicyAction(isPaused ? '/api/policy/resume' : '/api/policy/pause', null, isPaused ? 'strategyResumed' : 'allChargingPaused');
     });
     elements.limitEnabledInput.addEventListener('change', () => {
       postPolicyAction('/api/policy/limit', {
         enabled: elements.limitEnabledInput.checked,
         limit: Number(elements.limitInput.value),
-      }, elements.limitEnabledInput.checked ? '充电限制已开启' : '充电限制已关闭，已恢复系统默认充电');
+      }, elements.limitEnabledInput.checked ? 'limitEnabled' : 'limitDisabled');
     });
     elements.limitInput.addEventListener('change', () => {
       postPolicyAction('/api/policy/limit', {
         enabled: elements.limitEnabledInput.checked,
         limit: Number(elements.limitInput.value),
-      }, '充电上限已更新');
+      }, 'upperLimitUpdated');
     });
     elements.switcherEnabledInput.addEventListener('change', () => {
       postPolicyAction('/api/policy/switcher', {
         enabled: elements.switcherEnabledInput.checked,
         limit: Number(elements.limitInput.value),
-      }, elements.switcherEnabledInput.checked ? '浮动充电已开启' : '浮动充电已关闭');
+      }, elements.switcherEnabledInput.checked ? 'floatingEnabled' : 'floatingDisabled');
     });
 
+    applyLanguage(language);
     if (currentToken()) {
       refreshStatus();
     }

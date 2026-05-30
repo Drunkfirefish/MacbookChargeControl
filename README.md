@@ -4,6 +4,8 @@ MacCharge is a small Node.js CLI and LAN web control page for MacBook charging c
 
 It is designed for Apple Silicon Macs where direct charge limiting requires a lower-level helper. MacCharge does not implement SMC writes itself. It wraps the `battery` command from the open-source `actuallymentor/battery` project and adds a local CLI, token-protected HTTP API, and web UI.
 
+![alt text](image.png)
+
 ## Requirements
 
 - macOS on Apple Silicon.
@@ -122,6 +124,8 @@ maccharge web --host 0.0.0.0 --port 8765
 ```
 
 Open the URL printed in the terminal. From another device on the same Wi-Fi, use the Mac's LAN IP address with the same port, then enter the configured token in the page.
+
+The web UI supports Chinese and English. It follows the browser language by default, provides a `中 / EN` switch in the header, and remembers a manual selection on that device.
 
 The page refreshes every five seconds. Its battery panel shows flow direction, voltage, current, and power. Its policy panel has a state-aware pause/resume action, a charge-limit switch, one shared upper-bound input, and a floating-charge switch. Positive current and power mean charging; negative values mean discharging.
 

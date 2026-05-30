@@ -4,6 +4,8 @@ MacCharge 是一个用于 MacBook 充电控制的小型 Node.js CLI 和局域网
 
 它针对 Apple Silicon Mac 设计，因为直接限制充电需要更底层的 helper。MacCharge 本身并不直接执行 SMC 写入，而是包装开源项目 `actuallymentor/battery` 中的 `battery` 命令，并增加本地 CLI、令牌保护的 HTTP API 和 Web UI。
 
+![alt text](image.png)
+
 ## 要求
 
 - 运行 Apple Silicon 的 macOS。
@@ -122,6 +124,8 @@ maccharge web --host 0.0.0.0 --port 8765
 ```
 
 打开终端中打印的 URL。在同一 Wi-Fi 下的另一台设备上，使用 Mac 的局域网 IP 地址和相同端口，然后在页面中输入已配置的令牌。
+
+Web UI 支持中文和英文。页面默认跟随浏览器语言，页头提供 `中 / EN` 切换控件，并会在当前设备上记住手动选择。
 
 页面会每五秒刷新一次。电池面板显示电池流向、电压、电流和功率。策略面板提供根据当前状态切换的暂停/恢复操作、充电限制开关、统一的上限输入框，以及浮动充电开关。正电流与正功率表示充电；负值表示放电。
 

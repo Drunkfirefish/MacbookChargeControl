@@ -96,6 +96,13 @@ test('web page includes token login and charge controls', async () => {
     assert.doesNotMatch(html, /switcherOffButton/);
     assert.match(html, /恢复充电/);
     assert.match(html, /暂停充电/);
+    assert.match(html, /languageZhButton/);
+    assert.match(html, /languageEnButton/);
+    assert.match(html, /maccharge\.language/);
+    assert.match(html, /navigator\.language/);
+    assert.match(html, /data-i18n=/);
+    assert.match(html, /Battery status/);
+    assert.match(html, /Charging policy/);
   });
 });
 
