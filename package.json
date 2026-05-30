@@ -1,0 +1,16 @@
+{
+  "name": "maccharge",
+  "version": "0.1.0",
+  "description": "CLI and LAN web control for MacBook charging via a battery backend.",
+  "type": "module",
+  "bin": {
+    "maccharge": "./bin/maccharge.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}
