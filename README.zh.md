@@ -10,6 +10,10 @@ MacCharge 是一个用于 MacBook 充电控制的小型 Node.js CLI 和局域网
 - Node.js 18 或更新版本。
 - 来自 <https://github.com/actuallymentor/battery> 的 `battery` CLI。
 
+## macOS 兼容性
+
+MacCharge 已在运行 Apple Silicon (`arm64`) 的 macOS 15.4 (`24E248`) 上完成验证。其他 macOS 版本可能可以运行，但尚未经过验证。兼容性还取决于上游 `actuallymentor/battery` helper。
+
 `battery` 命令不是与之无关的 npm 包 `battery`。请按照该项目说明安装 Mac 充电工具，例如通过 Homebrew：
 
 ```bash

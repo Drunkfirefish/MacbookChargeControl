@@ -10,6 +10,10 @@ It is designed for Apple Silicon Macs where direct charge limiting requires a lo
 - Node.js 18 or newer.
 - The `battery` CLI from <https://github.com/actuallymentor/battery>.
 
+## macOS Compatibility
+
+MacCharge has been verified on macOS 15.4 (`24E248`) running on Apple Silicon (`arm64`). Other macOS versions may work, but have not been verified. Compatibility also depends on the upstream `actuallymentor/battery` helper.
+
 The `battery` command is not the unrelated npm package named `battery`. Install the Mac charging utility from its project instructions, for example with Homebrew:
 
 ```bash
